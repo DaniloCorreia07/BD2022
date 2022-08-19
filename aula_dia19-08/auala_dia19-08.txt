@@ -1,0 +1,105 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 40
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use revisao;
+Database changed
+MariaDB [revisao]> describe produtos;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| codigo       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_produto | varchar(255) | YES  |     | NULL    |                |
+| cor          | varchar(255) | YES  |     | NULL    |                |
+| preco        | decimal(5,2) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.021 sec)
+
+MariaDB [revisao]> insert into produtos(nome_produto,cor,preco) VALUES
+    -> ('borracha','azul',1.50)
+    -> ('lapis','rosa', 2.00)
+    -> ('caderno','preto',1.99)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('lapis','rosa', 2.00)
+('caderno','preto',1.99)' at line 3
+MariaDB [revisao]> insert into produtos(nome_produto,cor,preco) VALUES
+    -> ('borracha','azul',1.50),
+    ->  ('lapis','rosa',2.00),
+    ->  ('caderno','preto',69.00),
+    ->  ('mochila','amarela',77.77),
+    ->  ('regua','marromm bombom',5.00),]
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ']' at line 6
+MariaDB [revisao]> insert into produtos(nome_produto,cor,preco) VALUES
+    -> ('borracha','azul',1.50),
+    -> ('lapis','rosa',2.00),
+    -> ('caderno','preto',69.00),
+    -> ('mochila','amarela',77.77),
+    -> ('regua','marromm bombom',5.00),
+    -> ('estojo','preto',10.99),
+    -> ('canete','azul',2.99),
+    -> ('caneta','vermelha',2.99),
+    -> ('apontador','trasparente',3.99),
+    -> ('agenda','azul',19.99);
+Query OK, 10 rows affected (0.011 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> show produtos
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'produtos' at line 1
+MariaDB [revisao]>
+select * from produtos;
++--------+--------------+----------------+-------+
+| codigo | nome_produto | cor            | preco |
++--------+--------------+----------------+-------+
+|      1 | borracha     | azul           |  1.50 |
+|      2 | lapis        | rosa           |  2.00 |
+|      3 | caderno      | preto          | 69.00 |
+|      4 | mochila      | amarela        | 77.77 |
+|      5 | regua        | marromm bombom |  5.00 |
+|      6 | estojo       | preto          | 10.99 |
+|      7 | canetinha    | azul           |  2.99 |
+|      8 | caneta       | vermelha       |  2.99 |
+|      9 | apontador    | trasparente    |  3.99 |
+|     10 | agenda       | azul           | 19.99 |
++--------+--------------+----------------+-------+
+10 rows in set (0.000 sec)
+
+MariaDB [revisao]> select * from clientes;
++------------+--------------+---------------------------+--------+
+| id_cliente | nome_cliente | email                     | estado |
++------------+--------------+---------------------------+--------+
+|          2 | ETEC MCM     | etecmcm@gmail.com         | SP     |
+|          3 | ETEC MAUA    | etecmaua@email.com        | RJ     |
+|          4 | ETEC LG      | etecclairogomes@email.com | RJ     |
++------------+--------------+---------------------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [revisao]> insert into compras(data_compra,id_cliente,codigo) values
+    -> ('2022-08-19',2,4),
+    -> ('2022-08-19',2,4),
+    -> ('2022-08-18',3,2);
+Query OK, 3 rows affected (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> select * from compras;
++----+-------------+------------+--------+
+| nf | data_compra | id_cliente | codigo |
++----+-------------+------------+--------+
+| 13 | 2022-08-19  |          2 |      4 |
+| 14 | 2022-08-19  |          2 |      4 |
+| 15 | 2022-08-18  |          3 |      2 |
++----+-------------+------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [revisao]>
