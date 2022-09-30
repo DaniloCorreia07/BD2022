@@ -1,0 +1,17 @@
+CREATE TABLE serve para adicionar tabelas no banco de dados, a sintaxe é:
+ 
+CREATE TABLE nome_tabela(coluna1 tipo, coluna2 tipo, coluna3 tipo)
+ 
+ 
+ALTER TABLE pode adicionar, alterar ou deletar colunas de uma tabela. sintaxes:
+ 
+ALTER TABLE nome_tabela
+ADD nova_coluna  tipo
+ 
+ 
+ALTER TABLE nome_tabela
+ALTER COLUMN nome_coluna  tipo
+ 
+ 
+ALTER TABLE nome_tabela
+DROP COLUMN nome_coluna
